@@ -29,10 +29,8 @@ st.markdown(
 def load_RAG():
     #Load env. variables
     os.environ['OPENAI_API_KEY']=st.secrets['OPENAI_API_KEY']
-    #'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'
     os.environ['PINECONE_API_KEY']=st.secrets['PINECONE_API_KEY']
-    #'pcsk_2Zwydu_5FZX16wb3hD2fnVLh9AHwUrhGPizs9GLR2jf2Gf8YRxvjYpgvXM6u7LEvjRy7Y6'
-    #%%  
+#%%  
 
     pc=Pinecone(
         api_key=os.environ['PINECONE_API_KEY'],
