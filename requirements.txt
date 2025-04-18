@@ -1,0 +1,10 @@
+pinecone-client==2.2.2 
+openai==0.28.0 
+tiktoken==0.5.1 
+langchain==0.2.6
+langchain_openai
+pinecone
+beautifulsoup4
+langchain-community
+openai
+langchain_openai
