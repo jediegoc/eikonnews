@@ -5,3 +5,4 @@ beautifulsoup4
 langchain-community
 openai
 langchain_pinecone
+IPython
