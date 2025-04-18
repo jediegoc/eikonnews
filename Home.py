@@ -19,8 +19,7 @@ st.markdown(
     """
     **This App provides the following functionalities:**
     - Q&A with news articles for selected companies
-    - Q&A with news articles for a range of companies
-    - Q&A with news articles for all companies
+    - Q&A with news articles for a range of companies    
 """
 )
 
