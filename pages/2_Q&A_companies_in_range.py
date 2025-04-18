@@ -56,7 +56,7 @@ def retriever(chosen_companies):
         search_kwargs={#"score_threshold": 0.001,                                 
         "filter": {
                 "Company_Name":{"$in":chosen_companies},                        
-            },"k":400}),
+            },"k":100}),
         #search_kwargs={"k":400}
     )
     return qa_with_sources
