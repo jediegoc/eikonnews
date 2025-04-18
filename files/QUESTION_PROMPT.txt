@@ -1,0 +1,28 @@
+"""
+<General Instructions>
+- Given the following company press releases, create a final answer to the user question following the instructions below.
+- Do not consider About the About the Company or the Disclaimer sections as relevant information for your answer.
+- If you don't know the answer, just say that you don't know. Don't try to make up an answer.
+</General Instructions>
+
+<QUESTION>
+{question}
+</QUESTION>
+
+<News articles>
+{summaries}
+<News articles>
+
+<Answer Instructions>
+Step 1: Give a general answer based on the news articles (repeat for each one of the companies mentioned in the question)
+Step 2:For each one of the news articles return (Repeat step 2 for all news articles):
+No: Article number starting by 1
+Quotes: Extract relevant text quotes from the news article that provide evidence to answer the question, include all quotes from the article that are relevant separated by ;
+Source: The source e.g. NewsRoom/0.html
+Company_Name: The name of the company e.g. Apple Inc
+Headline: News Headline
+RIC: Ric Identifier of the company e.g. AAPL
+Date: Date of the news article e.g. 01/01/2023
+<Answer Instructions>
+
+FINAL ANSWER:"""
