@@ -10,6 +10,13 @@ from langchain.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain_core.callbacks import BaseCallbackHandler
+from Home import load_RAG
+
+#%% Load docssearch if not initialized
+if "docsearch" not in st.session_state:
+    docsearch=load_RAG()
+    st.session_state.docsearch=docsearch
+
 #%% Read/adapt the prompts
 DOCUMENT_PROMPT = """{page_content}
 Date: {Date}
