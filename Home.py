@@ -1,4 +1,4 @@
-#%%
+#%% Loading libraries
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -6,22 +6,24 @@ import os
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import Pinecone as Pinecone_lang
 from pinecone import Pinecone, ServerlessSpec
-#%%
-st.set_page_config(
-    page_title="Home"    
-)
+#%% Set page layout
+try:
+    st.set_page_config(
+        page_title="Home"    
+    )
 
-st.write("# Q&A with news sources")
+    st.write("# Q&A with news sources")
 
-st.sidebar.success("Select an Option above")
+    st.sidebar.success("Select an Option above")
 
-st.markdown(
+    st.markdown(
+        """
+        **This App provides the following functionalities:**
+        - Q&A with news articles for selected companies
+        - Q&A with news articles for a range of companies    
     """
-    **This App provides the following functionalities:**
-    - Q&A with news articles for selected companies
-    - Q&A with news articles for a range of companies    
-"""
-)
+    )
+except:
 
 #%% Load RAG
 @st.cache_resource
