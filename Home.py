@@ -23,8 +23,8 @@ try:
         - Q&A with news articles for a range of companies    
     """
     )
-except:
-
+except Exception e:
+    exception=e
 #%% Load RAG
 @st.cache_resource
 def load_RAG():
