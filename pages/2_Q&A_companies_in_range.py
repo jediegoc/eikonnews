@@ -1,4 +1,4 @@
-#%%
+#%% Load libraries
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -11,12 +11,11 @@ from langchain_openai import ChatOpenAI
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain_core.callbacks import BaseCallbackHandler
 from Home import load_RAG
-#%%
+#%% Load docssearch if not initialized
 if "docsearch" not in st.session_state:
     docsearch=load_RAG()
     st.session_state.docsearch=docsearch
-#%%
-# Read/adapt the prompts below at will
+#%% Read/adapt the prompts
 DOCUMENT_PROMPT = """{page_content}
 Date: {Date}
 Headline: {Headline}
@@ -32,7 +31,7 @@ with open("files/QUESTION_PROMPT.txt", "r") as f:
 document_prompt = PromptTemplate.from_template(DOCUMENT_PROMPT)
 question_prompt = PromptTemplate.from_template(QUESTION_PROMPT)
 
-#%%
+#%% Configure the retriever with the input of user chosen companies
 def retriever(chosen_companies):
     # Import RetrievalQAWithSourcesChain and ChatOpenAI
     class MyCustomHandler(BaseCallbackHandler):
@@ -61,7 +60,7 @@ def retriever(chosen_companies):
     )
     return qa_with_sources
 
-#%%
+#%% Read available companies
 def read():
     companies=pd.read_csv("Companies_NYSE_NASDAQ_Pinecone.csv")
     companies=companies['Company_Name']
@@ -70,14 +69,18 @@ def read():
 companies=read()
 
 
-#%% SIDEBAR
-st.set_page_config(
-    page_title="Q&A selected companies"    
-)
+#%% Visual components
+#Page config
+try:
+    st.set_page_config(
+        page_title="Q&A selected companies"    
+    )
+except Exception:
+    pass
 
 st.markdown("# Q&A for companies in a range")
 st.sidebar.header("Q&A for companies in a range" )
-
+#Expander for the prompt
 expander = st.expander("Question Prompt")
 prompt=expander.text_area(label="Question Prompt",value=QUESTION_PROMPT)
 if prompt:
@@ -85,18 +88,17 @@ if prompt:
 #Input range
 range_start=st.sidebar.number_input("Start",0,len(companies),value=0,step=1)
 range_end=st.sidebar.number_input("End",0,len(companies),value=5,step=1)
-button=st.sidebar.button("Clear chat history")
 #Display Companies
 chosen_companies=st.sidebar.dataframe(companies)
-
+#Clear history
+button=st.sidebar.button("Clear chat history")
 if button:
     st.session_state.messages = []
 
-#%%
+#%% Display dataframe with companies
 companies[range_start:range_end+1]
 
-#%%
-# Initialize chat history
+#%% Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Let's start chatting! 👇"}]
 
@@ -104,13 +106,13 @@ if "messages" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.html(message["content"])
-
+#Format outputs with markdown
 def format_markdown(answer1):
   answer1=re.search('text=[\'"](.*?)\s*generation_info',answer1).group(1)
   answer1=re.sub(r'\\n',"<br>",answer1)  
   return answer1
 
-# Accept user input
+# Accept user input and run RAG
 if prompt := st.chat_input("Ask a question. E.g. Which AI technologies have companies adopted?"):
        
     question = {'question':prompt+"Companies: "+', '.join(companies[range_start:(range_end+1)])}
