@@ -1,8 +1,8 @@
 pinecone-client==2.2.2 
-langchain_openai==0.1.10
+langchain_openai
 pinecone==6.0.2
-beautifulsoup4==4.12.2
-langchain-community==0.2.6
-openai==1.75.0
-langchain_pinecone==0.1.1
-IPython==8.20.0
+beautifulsoup4
+langchain-community
+openai
+langchain_pinecone
+IPython
