@@ -1,6 +1,6 @@
 pinecone-client==2.2.2 
 langchain_openai
-pinecone
+pinecone==6.0.2
 beautifulsoup4
 langchain-community
 openai
