@@ -108,9 +108,17 @@ for message in st.session_state.messages:
         st.html(message["content"])
 #Format outputs with markdown
 def format_markdown(answer1):
-  answer1=re.search('text=[\'"](.*?)\s*generation_info',answer1).group(1)
-  answer1=re.sub(r'\\n',"<br>",answer1)  
-  return answer1
+  #answer1=re.search('text=[\'"](.*?)\s*generation_info',answer1).group(1)
+  #answer1=re.sub(r'\\n',"<br>",answer1)
+  match = re.search(r"message=AIMessage\(content='(.*?)'\s*,\s*additional_kwargs=", answer1, re.DOTALL)
+  if match:
+      content_text = match.group(1)
+      # Convert escaped newlines to actual HTML breaks
+      content_text = content_text.replace("\\n", "<br>")
+      return content_text
+  else:
+      return "AIMessage content not found."
+  #return answer1
 
 # Accept user input and run RAG
 if prompt := st.chat_input("Ask a question. E.g. Which AI technologies have companies adopted?"):
