@@ -107,8 +107,8 @@ for message in st.session_state.messages:
         st.html(message["content"])
 #Format messages
 def format_markdown(answer1):
-  answer1=re.search('text=[\'"](.*?)\s*generation_info',answer1).group(1)
-  answer1=re.sub(r'\\n',"<br>",answer1)  
+  #answer1=re.search('text=[\'"](.*?)\s*generation_info',answer1).group(1)
+  #answer1=re.sub(r'\\n',"<br>",answer1)  
   return answer1
 
 # Accept user input and run RAG
