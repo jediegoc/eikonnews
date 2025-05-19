@@ -5,4 +5,4 @@ langchain-community==0.3.23
 openai==1.77.0
 langchain_pinecone==0.2.5
 IPython==9.2.0
-pinecone==6.0.2
+pinecone
